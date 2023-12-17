@@ -93,6 +93,7 @@ def perform_experiments(console, graph, input_file):
 
         # !"Kadabra" approach:
         table.add_row("Approximation - Kadabra/NetworKit")
+        average_time_kadabra = 0
         for i in range(0, 10):
             start_time_kadabra = time.time()
             betweenness_kadabra = nk.centrality.KadabraBetweenness(
