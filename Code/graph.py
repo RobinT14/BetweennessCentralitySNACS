@@ -2,21 +2,30 @@ from rich.table import Table
 import networkx as nx
 
 
-def read_file(filename, console, diGraph=True, weigthed=False):
+def read_file(filename, console, diGraph=True, weighted='Float'):
     try:
         if diGraph:
-            G = nx.read_edgelist(filename,
-                                 nodetype=int,
-                                 create_using=nx.DiGraph,
-                                 data=(("weight", float), ))
+            if weighted == 'Float':
+                G = nx.read_edgelist(filename,
+                                     nodetype=int,
+                                     create_using=nx.DiGraph,
+                                     data=(("weight", float), ))
+            else weighted == 'Int':
+                G = nx.read_edgelist(filename,
+                                     nodetype=int,
+                                     create_using=nx.DiGraph,
+                                     data=(("weight", int), ))
         else:
-            try:
+            if weighted == 'Float':
                 G = nx.read_edgelist(filename,
                                      nodetype=int,
                                      create_using=nx.Graph,
                                      data=(("weight", float), ))
-            except:
-                G = nx.read_weighted_edgelist(filename, nodetype=float)
+            else weighted == 'Int':
+                G = nx.read_edgelist(filename,
+                                     nodetype=int,
+                                     create_using=nx.Graph,
+                                     data=(("weight", int), ))
     except:
         console.print(
             f"[bold red]Error: Input file - '{filename}' not readable by NetworkX.[/bold red]\n")
