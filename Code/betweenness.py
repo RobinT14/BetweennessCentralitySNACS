@@ -97,7 +97,7 @@ def perform_experiments(console, graph, input_file):
         for i in range(0, 1):
             start_time_kadabra = time.time()
             betweenness_kadabra = nk.centrality.KadabraBetweenness(
-                G, 0.0001, 0.8)  # these are the default settings
+                G, 0.1, 0.8)  # these are the default settings
             betweenness_kadabra.run()
             end_time_kadabra = time.time()
             average_time_kadabra += (end_time_kadabra -
