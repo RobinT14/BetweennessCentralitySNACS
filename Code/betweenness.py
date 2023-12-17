@@ -11,7 +11,7 @@ def perform_experiments(console, graph, input_file):
     table.add_column("Type", justify="left", style="cyan")
     table.add_column("Execution Time(s)", justify="left", style="green")
     with Progress() as progress:
-        task = progress.add_task("[cyan]Working...", total=5)
+        task = progress.add_task("[cyan]Working...", total=6)
 
         # !Exact calculation of betweenness centrality using Brandes in NetworkX
         start_time_exact = time.time()
@@ -91,13 +91,28 @@ def perform_experiments(console, graph, input_file):
                       str(average_time_riondato))
         progress.update(task, advance=1)
 
+        # !"Kadabra" approach:
+        table.add_row("Approximation - Kadabra/NetworKit")
+        for i in range(0, 10):
+            start_time_kadabra = time.time()
+            betweenness_kadabra = nk.centrality.KadabraBetweenness(
+                G, 0.0001, 0.8)  # these are the default settings
+            betweenness_kadabra.run()
+            end_time_kadabra = time.time()
+            average_time_kadabra += (end_time_kadabra -
+                                     start_time_kadabra)
+            average_time_kadabra /= 10
+            table.add_row(f"\t Average of 10 runs",
+                          str(average_time_kadabra))
+            progress.update(task, advance=1)
+
         # # !"Bergamini" approach:
         table.add_row("Approximation - Bergamini/NetworKit")
         average_time_bergamini = 0
         for i in range(0, 10):
             start_time_approx_bergamini = time.time()
             bergamini_betweenness = nk.centrality.DynApproxBetweenness(
-                G, epsilon=0.0001, delta=0.1, storePredecessors=True, universalConstant=0.5)
+                G, epsilon=0.075, delta=0.1, storePredecessors=False, universalConstant=0.5)
             bergamini_betweenness.run()
             end_time_approx_bergamini = time.time()
             average_time_bergamini += (end_time_approx_bergamini -

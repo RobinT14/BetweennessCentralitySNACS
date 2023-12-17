@@ -23,7 +23,10 @@ def main():
         'input_file', help='Path to the input file, of a give graph')
 
     parser.add_argument(
-        '-d', '--directed', help='Set input graph type to directed graph. True OR False, Default=False')
+        '-d', '--directed', help='Set input graph type to directed graph. True OR False, Default=True')
+
+    parser.add_argument(
+        '-w', '--weighted', help='Set input graph type to weighted graph. True OR False, Default=False')
 
     args = parser.parse_args()
 
@@ -40,6 +43,17 @@ def main():
                 f"[bold red]Error: Command Line Argument '-d', '--directed' shoud be True or False.[/bold red]\n")
             exit(1)
 
+    weighted = False
+    if args.weighted is not None:
+        if args.weighted == "True":
+            weighted = True
+        elif args.weighted == "False":
+            weighted = False
+        else:
+            console.print(
+                f"[bold red]Error: Command Line Argument '-w', '--weighted' shoud be True or False.[/bold red]\n")
+            exit(1)
+
     if os.path.isfile(input_file):
         console.print(
             f"[bold green]Reading graph from input file: '{input_file}'[/bold green]\n")
@@ -48,7 +62,7 @@ def main():
             f"[bold red]Error: Input file - '{input_file}' does not exist.[/bold red]\n")
         exit(1)
 
-    graph = read_file(input_file, console, directed)
+    graph = read_file(input_file, console, directed, weighted)
     print_graph_stats(console, input_file, graph)
 
     perform_experiments(console, graph, input_file)

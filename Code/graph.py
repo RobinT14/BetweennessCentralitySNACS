@@ -2,7 +2,7 @@ from rich.table import Table
 import networkx as nx
 
 
-def read_file(filename, console, diGraph=True):
+def read_file(filename, console, diGraph=True, weigthed=False):
     try:
         if diGraph:
             G = nx.read_edgelist(filename,
