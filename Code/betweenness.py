@@ -15,7 +15,7 @@ def perform_experiments(console, graph, input_file):
 
         # !Exact calculation of betweenness centrality using Brandes in NetworkX
         start_time_exact = time.time()
-        # betweenness = nx.betweenness_centrality(graph)
+        betweenness = nx.betweenness_centrality(graph)
         end_time_exact = time.time()
         # TODO Write Exact To File
         table.add_row("Exact - Brandes NetworkX",
@@ -31,15 +31,11 @@ def perform_experiments(console, graph, input_file):
             for i in range(0, 10):
                 # !Approximation of betweenness
                 start_time_approx_brandes = time.time()
-                # betweenness_approx = nx.betweenness_centrality(
-                #     graph, k=sampleSize)
+                betweenness_approx = nx.betweenness_centrality(
+                    graph, k=sampleSize)
                 end_time_approx_brandes = time.time()
-                # TODO Write To File
                 average_time_brandes += (end_time_approx_brandes -
                                          start_time_approx_brandes)
-                # TODO Add if all output is wanted
-                # table.add_row(f"\t {sample}% sampled, run {i}",
-                #               str(end_time_approx - start_time_approx))
             average_time_brandes /= 10
             table.add_row(f"\t {sample}% sampled, average of 10 runs",
                           str(average_time_brandes))
@@ -65,7 +61,7 @@ def perform_experiments(console, graph, input_file):
         # !"Geisberger" approach:
         table.add_row("Approximation - Geisberger/NetworKit")
         average_time_geisberger = 0
-        for i in range(0, 1):  # TODO set to 10
+        for i in range(0, 10):
             start_time_approx_geisberger = time.time()
             geisberger_betweenness = nk.centrality.EstimateBetweenness(
                 G, 50, True, False)
@@ -81,7 +77,7 @@ def perform_experiments(console, graph, input_file):
         # !"Riondato" approach:
         table.add_row("Approximation - Riondato/NetworKit")
         average_time_riondato = 0
-        for i in range(0, 1):  # TODO set to 10
+        for i in range(0, 10):
             start_time_approx_riondato = time.time()
             riondato_betweenness = nk.centrality.ApproxBetweenness(G,
                                                                    epsilon=0.1,
@@ -99,14 +95,14 @@ def perform_experiments(console, graph, input_file):
         # # !"Bergamini" approach:
         table.add_row("Approximation - Bergamini/NetworKit")
         average_time_bergamini = 0
-        # for i in range(0, 1):  # TODO set to 10
-        #     start_time_approx_bergamini = time.time()
-        #     bergamini_betweenness = nk.centrality.DynApproxBetweenness(
-        #         G, epsilon=0.01, delta=0.1, storePredecessors=True, universalConstant=0.5)
-        #     bergamini_betweenness.run()
-        #     end_time_approx_bergamini = time.time()
-        #     average_time_bergamini += (end_time_approx_bergamini -
-        #                                start_time_approx_bergamini)
+        for i in range(0, 10):
+            start_time_approx_bergamini = time.time()
+            bergamini_betweenness = nk.centrality.DynApproxBetweenness(
+                G, epsilon=0.01, delta=0.1, storePredecessors=True, universalConstant=0.5)
+            bergamini_betweenness.run()
+            end_time_approx_bergamini = time.time()
+            average_time_bergamini += (end_time_approx_bergamini -
+                                       start_time_approx_bergamini)
         average_time_bergamini /= 10
         table.add_row(f"\t Average of 10 runs",
                       str(average_time_bergamini))
