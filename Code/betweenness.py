@@ -101,10 +101,10 @@ def perform_experiments(console, graph, input_file):
             end_time_kadabra = time.time()
             average_time_kadabra += (end_time_kadabra -
                                      start_time_kadabra)
-            average_time_kadabra /= 10
-            table.add_row(f"\t Average of 10 runs",
-                          str(average_time_kadabra))
-            progress.update(task, advance=1)
+        average_time_kadabra /= 10
+        table.add_row(f"\t Average of 10 runs",
+                      str(average_time_kadabra))
+        progress.update(task, advance=1)
 
         # # !"Bergamini" approach:
         table.add_row("Approximation - Bergamini/NetworKit")

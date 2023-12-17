@@ -26,7 +26,7 @@ def main():
         '-d', '--directed', help='Set input graph type to directed graph. True OR False, Default=True')
 
     parser.add_argument(
-        '-w', '--weighted', help='Set input graph type to weighted graph. True OR False, Default=False')
+        '-w', '--weighted', help='Set input graph type to weighted graph. Float OR Int, Default=Float')
 
     args = parser.parse_args()
 
@@ -43,15 +43,15 @@ def main():
                 f"[bold red]Error: Command Line Argument '-d', '--directed' shoud be True or False.[/bold red]\n")
             exit(1)
 
-    weighted = False
+    weighted = 'Float'
     if args.weighted is not None:
-        if args.weighted == "True":
-            weighted = True
-        elif args.weighted == "False":
-            weighted = False
+        if args.weighted == "Float":
+            weighted = 'Float'
+        elif args.weighted == "Int":
+            weighted = 'Int'
         else:
             console.print(
-                f"[bold red]Error: Command Line Argument '-w', '--weighted' shoud be True or False.[/bold red]\n")
+                f"[bold red]Error: Command Line Argument '-w', '--weighted' shoud be Float or Int.[/bold red]\n")
             exit(1)
 
     if os.path.isfile(input_file):

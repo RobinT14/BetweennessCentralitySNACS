@@ -10,10 +10,13 @@ def read_file(filename, console, diGraph=True, weigthed=False):
                                  create_using=nx.DiGraph,
                                  data=(("weight", float), ))
         else:
-            G = nx.read_edgelist(filename,
-                                 nodetype=int,
-                                 create_using=nx.Graph,
-                                 data=(("weight", float), ))
+            try:
+                G = nx.read_edgelist(filename,
+                                     nodetype=int,
+                                     create_using=nx.Graph,
+                                     data=(("weight", float), ))
+            except:
+                G = nx.read_weighted_edgelist(filename, nodetype=float)
     except:
         console.print(
             f"[bold red]Error: Input file - '{filename}' not readable by NetworkX.[/bold red]\n")
