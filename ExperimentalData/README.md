@@ -1,7 +1,7 @@
 # Experimental Data
 
 This folder contains all scripts to individually run exact calculation/approximation of betweenness centrality of our approaches. The output of this is saved in JSON format and logged into stat.log.
-Each folder contains all script and results for each of the used datasets.
+Each folder contains all scripts and results for each of the used datasets.
 
 ### Folder contents
 
