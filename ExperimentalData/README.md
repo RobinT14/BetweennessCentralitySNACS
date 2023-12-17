@@ -29,8 +29,8 @@ NetworKit: networkit_script_tuned.py
 
 Error Analysis:
 
-- error_networkx.py: will calculate error measures for NetworkX estimations, output to networkit_error.csv
-- error_networkit.py: will calculate error measures for NetworKit estimations, output to networkx_error.csv
+- error_networkx.py: will calculate error measures for NetworkX estimations, output to networkx_error.csv
+- error_networkit.py: will calculate error measures for NetworKit estimations, output to networkiy_error.csv
 - tuned.py: will calculate error measures for tuned NetworKit estimations, output to tuned.csv
 
 Betweenness Centrality Agreement using Tau Values:
