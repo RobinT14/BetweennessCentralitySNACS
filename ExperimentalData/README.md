@@ -31,10 +31,13 @@ Error Analysis:
 
 - error_networkx.py: will calculate error measures for NetworkX estimations, output to networkit_error.csv
 - error_networkit.py: will calculate error measures for NetworKit estimations, output to networkx_error.csv
-- tuned.pu: will calculate error measures for tuned NetworKit estimations, output to tuned.csv
+- tuned.py: will calculate error measures for tuned NetworKit estimations, output to tuned.csv
 
 Betweenness Centrality Agreement using Tau Values:
 
 - tau_networkx.py: will perform tau value calculation of networkx estimations, output to networkx_tau.csv
 - tau_networkit.py: will perform tau value calculation of networkit estimations, output to networkit_tau.csv
-- tuned.pu: will perform tau value calculation for tuned NetworKit estimations, output to tuned.csv
+- tuned.py: will perform tau value calculation for tuned NetworKit estimations, output to tuned.csv
+
+Results:
+Tau.csv: For all performed algorithms performed on each dataset, the total output is written to Tau.csv. It contains information about running time, minimal/maximal Tau value, MAE and RMSE.
