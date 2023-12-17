@@ -43,17 +43,6 @@ def main():
                 f"[bold red]Error: Command Line Argument '-d', '--directed' shoud be True or False.[/bold red]\n")
             exit(1)
 
-    weighted = 'Float'
-    if args.weighted is not None:
-        if args.weighted == "Float":
-            weighted = 'Float'
-        elif args.weighted == "Int":
-            weighted = 'Int'
-        else:
-            console.print(
-                f"[bold red]Error: Command Line Argument '-w', '--weighted' shoud be Float or Int.[/bold red]\n")
-            exit(1)
-
     if os.path.isfile(input_file):
         console.print(
             f"[bold green]Reading graph from input file: '{input_file}'[/bold green]\n")
@@ -62,7 +51,7 @@ def main():
             f"[bold red]Error: Input file - '{input_file}' does not exist.[/bold red]\n")
         exit(1)
 
-    graph = read_file(input_file, console, directed, weighted)
+    graph = read_file(input_file, console, directed)
     print_graph_stats(console, input_file, graph)
 
     perform_experiments(console, graph, input_file)
