@@ -16,19 +16,19 @@ The following repository contains all code as presented in our paper. This code 
 Usage of the script as follows:
 
 ```
-usage: betweennessCentrality.py [-h] [-d DIRECTED] input_file
+usage: betweennessCentrality.py [-h] [-d DIRECTED] [-R RESULTS] input_file
 
-This script will perform exact calculation and approximation of betweenness
-centrality, and will present the statistics of this.
+This script will perform exact calculation and approximation of betweenness centrality, and will present the statistics of this.
 
 positional arguments:
-input_file Path to the input file, of a give graph in (weighted) edge-list format
+  input_file            Path to the input file, of a give graph
 
-optional arguments:
--h, --help show this help message and exit
--d DIRECTED, --directed DIRECTED
-Set input graph type to directed graph. True OR False,
-Default=False
+options:
+  -h, --help            show this help message and exit
+  -d DIRECTED, --directed DIRECTED
+                        Set input graph type to directed graph. True OR False, Default=True
+  -R RESULTS, --results RESULTS
+                        Set output directory, to write exact/estimation JSONs to.
 
 ```
 
