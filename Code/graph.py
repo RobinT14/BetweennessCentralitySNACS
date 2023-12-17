@@ -10,7 +10,7 @@ def read_file(filename, console, diGraph=True, weighted='Float'):
                                      nodetype=int,
                                      create_using=nx.DiGraph,
                                      data=(("weight", float), ))
-            else weighted == 'Int':
+            else:
                 G = nx.read_edgelist(filename,
                                      nodetype=int,
                                      create_using=nx.DiGraph,
@@ -21,7 +21,7 @@ def read_file(filename, console, diGraph=True, weighted='Float'):
                                      nodetype=int,
                                      create_using=nx.Graph,
                                      data=(("weight", float), ))
-            else weighted == 'Int':
+            else:
                 G = nx.read_edgelist(filename,
                                      nodetype=int,
                                      create_using=nx.Graph,
