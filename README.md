@@ -9,6 +9,7 @@ The following repository contains all code as presented in our paper. This code 
 - betweennessCentrality.py: script to perform betweenness centrality calculation/approximation using all of our created methods.
 - Code: contains all necessary code to perform betweenness centrality estimation
 - Data: contains all datasets that are used within our paper
+- ExperimentalData: contains all data of performed experiments, including all scripts to perform exact calculation and estimations in NetworkX/NetworKit, as well as all results of performed analyses.
 
 ### betweennessCentrality.py:
 
