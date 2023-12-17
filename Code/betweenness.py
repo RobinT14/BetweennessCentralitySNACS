@@ -85,7 +85,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
             average_time_geisberger += (end_time_approx_geisberger -
                                         start_time_approx_geisberger)
             if writeResult == True:
-                path = resultsPath + f"geisberger{str(i)}.json"
+                path = resultsPath + f"/geisberger{str(i)}.json"
                 with open(path, 'w') as json_file:
                     json.dump(dict(geisberger_betweenness.ranking()), json_file,
                               indent=2, sort_keys=True)
@@ -108,7 +108,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
             average_time_riondato += (end_time_approx_riondato -
                                       start_time_approx_riondato)
             if writeResult == True:
-                path = resultsPath + f"riondato{str(i)}.json"
+                path = resultsPath + f"/riondato{str(i)}.json"
                 with open(path, 'w') as json_file:
                     json.dump(dict(riondato_betweenness.ranking()), json_file,
                               indent=2, sort_keys=True)
@@ -129,7 +129,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
             average_time_kadabra += (end_time_kadabra -
                                      start_time_kadabra)
             if writeResult == True:
-                path = resultsPath + f"kadabra{str(i)}.json"
+                path = resultsPath + f"/kadabra{str(i)}.json"
                 with open(path, 'w') as json_file:
                     json.dump(dict(betweenness_kadabra.ranking()), json_file,
                               indent=2, sort_keys=True)
@@ -150,7 +150,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
             average_time_bergamini += (end_time_approx_bergamini -
                                        start_time_approx_bergamini)
             if writeResult == True:
-                path = resultsPath + f"bergamini{str(i)}.json"
+                path = resultsPath + f"/bergamini{str(i)}.json"
                 with open(path, 'w') as json_file:
                     json.dump(dict(bergamini_betweenness.ranking()), json_file,
                               indent=2, sort_keys=True)
