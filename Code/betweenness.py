@@ -4,9 +4,10 @@ import networkx as nx
 import networkit as nk
 import time
 import math
+import json
 
 
-def perform_experiments(console, graph, input_file):
+def perform_experiments(console, graph, input_file, directed, writeResult, resultsPath):
     table = Table(title="Experimental Results - Betweenness Centrality")
     table.add_column("Type", justify="left", style="cyan")
     table.add_column("Execution Time(s)", justify="left", style="green")
@@ -17,6 +18,11 @@ def perform_experiments(console, graph, input_file):
         start_time_exact = time.time()
         betweenness = nx.betweenness_centrality(graph)
         end_time_exact = time.time()
+        if writeResult == True:
+            path = resultsPath + '/BrandesExact.json'
+            with open(path, 'w') as json_file:
+                json.dump(betweenness, json_file,
+                          indent=2, sort_keys=True)
         table.add_row("Exact - Brandes NetworkX",
                       str(end_time_exact - start_time_exact))
         progress.update(task, advance=1)
@@ -35,6 +41,12 @@ def perform_experiments(console, graph, input_file):
                 end_time_approx_brandes = time.time()
                 average_time_brandes += (end_time_approx_brandes -
                                          start_time_approx_brandes)
+                if writeResult == True:
+                    path = resultsPath + \
+                        f'/BrandesEstimation{sample}_{str(i)}.json'
+                    with open(path, 'w') as json_file:
+                        json.dump(betweenness_approx, json_file,
+                                  indent=2, sort_keys=True)
             average_time_brandes /= 10
             table.add_row(f"\t {sample}% sampled, average of 10 runs",
                           str(average_time_brandes))
@@ -42,16 +54,20 @@ def perform_experiments(console, graph, input_file):
 
         # !Approximation of betweenness using networkit:
         try:
-            G = nk.readGraph(
-                input_file, nk.Format.EdgeListTabZero, directed=False)
-            # G = nk.readGraph(
-            #     input_file, nk.Format.EdgeListTabOne)
+            if directed == True:
+                G = nk.readGraph(
+                    input_file, nk.Format.EdgeListTabZero, directed=True)
+            else:
+                G = nk.readGraph(
+                    input_file, nk.Format.EdgeListTabZero, directed=False)
         except:
             try:
-                G = nk.readGraph(
-                    input_file, nk.Format.EdgeListSpaceZero, directed=False)
-                # G = nk.readGraph(
-                #     input_file, nk.Format.EdgeListSpaceOne)
+                if directed == True:
+                    G = nk.readGraph(
+                        input_file, nk.Format.EdgeListSpaceZero, directed=True)
+                else:
+                    G = nk.readGraph(
+                        input_file, nk.Format.EdgeListSpaceZero, directed=False)
             except:
                 console.print(
                     f"[bold red]Error: Input file - '{input_file}' not readable by NetworKit.[/bold red]\n")
@@ -68,6 +84,11 @@ def perform_experiments(console, graph, input_file):
             end_time_approx_geisberger = time.time()
             average_time_geisberger += (end_time_approx_geisberger -
                                         start_time_approx_geisberger)
+            if writeResult == True:
+                path = resultsPath + f"geisberger{str(i)}.json"
+                with open(path, 'w') as json_file:
+                    json.dump(dict(geisberger_betweenness.ranking()), json_file,
+                              indent=2, sort_keys=True)
         average_time_geisberger /= 10
         table.add_row(f"\t Average of 10 runs",
                       str(average_time_geisberger))
@@ -86,6 +107,11 @@ def perform_experiments(console, graph, input_file):
             end_time_approx_riondato = time.time()
             average_time_riondato += (end_time_approx_riondato -
                                       start_time_approx_riondato)
+            if writeResult == True:
+                path = resultsPath + f"riondato{str(i)}.json"
+                with open(path, 'w') as json_file:
+                    json.dump(dict(riondato_betweenness.ranking()), json_file,
+                              indent=2, sort_keys=True)
         average_time_riondato /= 10
         table.add_row(f"\t Average of 10 runs",
                       str(average_time_riondato))
@@ -102,6 +128,11 @@ def perform_experiments(console, graph, input_file):
             end_time_kadabra = time.time()
             average_time_kadabra += (end_time_kadabra -
                                      start_time_kadabra)
+            if writeResult == True:
+                path = resultsPath + f"kadabra{str(i)}.json"
+                with open(path, 'w') as json_file:
+                    json.dump(dict(betweenness_kadabra.ranking()), json_file,
+                              indent=2, sort_keys=True)
         average_time_kadabra /= 10
         table.add_row(f"\t Average of 10 runs",
                       str(average_time_kadabra))
@@ -118,6 +149,11 @@ def perform_experiments(console, graph, input_file):
             end_time_approx_bergamini = time.time()
             average_time_bergamini += (end_time_approx_bergamini -
                                        start_time_approx_bergamini)
+            if writeResult == True:
+                path = resultsPath + f"bergamini{str(i)}.json"
+                with open(path, 'w') as json_file:
+                    json.dump(dict(bergamini_betweenness.ranking()), json_file,
+                              indent=2, sort_keys=True)
         average_time_bergamini /= 10
         table.add_row(f"\t Average of 10 runs",
                       str(average_time_bergamini))

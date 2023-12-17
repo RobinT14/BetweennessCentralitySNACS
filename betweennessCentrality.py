@@ -26,7 +26,7 @@ def main():
         '-d', '--directed', help='Set input graph type to directed graph. True OR False, Default=True')
 
     parser.add_argument(
-        '-w', '--weighted', help='Set input graph type to weighted graph. Float OR Int, Default=Float')
+        '-R', '--results', help='Set output directory, to write exact/estimation JSONs to.')
 
     args = parser.parse_args()
 
@@ -43,6 +43,13 @@ def main():
                 f"[bold red]Error: Command Line Argument '-d', '--directed' shoud be True or False.[/bold red]\n")
             exit(1)
 
+    writeResult = False
+    writeResultPath = ''
+    if args.results is not None:
+        if os.path.isdir(args.results):
+            writeResult = True
+            writeResultPath = args.results
+
     if os.path.isfile(input_file):
         console.print(
             f"[bold green]Reading graph from input file: '{input_file}'[/bold green]\n")
@@ -53,8 +60,8 @@ def main():
 
     graph = read_file(input_file, console, directed)
     print_graph_stats(console, input_file, graph)
-
-    perform_experiments(console, graph, input_file)
+    perform_experiments(console, graph, input_file,
+                        directed, writeResult, writeResultPath)
 
 
 if __name__ == "__main__":
