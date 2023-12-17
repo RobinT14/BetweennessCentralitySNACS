@@ -43,20 +43,28 @@ This script will perform our experiment consisting of the following steps:
 
 - Directed and weighted graph: yeastinter_st.txt
   - Nodes: 688 Edges: 1,079
+  - Command: `python3 betweennessCentrality.py Data/yeastinter_st.txt`
 - Directed and weighted graph: USairport500
   - Nodes: 7,976 Edges: 30,501
+  - Command: `python3 betweennessCentrality.py Data/USairport500.txt`
 - Directed and unweighted graph: email-Eu-core.txt
   - Nodes: 1,005 Edges: 25,571
+  - Command `python3 betweennessCentrality.py Data/email-Eu-core.txt`
 - Directed and unweighted graph: p2p-Gnutella24.txt
   - Nodes: 26,518 Edges: 65,369
+  - Command: `python3 betweennessCentrality.py Data/p2p-Gnutella24.txt`
 - Undirected and weighted graph: mol_yeast_spliceosome.txt
   - Nodes: 103 Edges: 4,119
+  - Command: `python3 betweennessCentrality.py -d False Data/mol_yeast_spliceosome.txt`
 - Undirected and weighted graph: bio-CE-CX.txt
   - Nodes: 15,229 Edges: 245,952
+  - Command: `python3 betweennessCentrality.py -d False Data/bio-CE-CX.edges`
 - Undirected and unweighted graph: mc_mullen.txt
   - Nodes: 159 Edges: 204
-- Undirected and unweighted graph: bio-CE-CX.txt
+  - Command: `python3 betweennessCentrality.py -d False Data/mc_mullen.txt`
+- Undirected and unweighted graph: oregon1_010526.txt
   - Nodes: 11,174 Edges: 23,409
+  - Command: `python3 betweennessCentrality.py -d False Data/oregon1_010526.txt`
 
 ### Dependencies
 
