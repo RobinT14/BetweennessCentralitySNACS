@@ -33,7 +33,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
         for sample in samples:
             sampleSize = math.floor(len(graph.nodes) * (sample/100))
             average_time_brandes = 0
-            for i in range(0, 1):
+            for i in range(0, 10):
                 # !Approximation of betweenness
                 start_time_approx_brandes = time.time()
                 betweenness_approx = nx.betweenness_centrality(
@@ -76,7 +76,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
         # !"Geisberger" approach:
         table.add_row("Approximation - Geisberger/NetworKit")
         average_time_geisberger = 0
-        for i in range(0, 1):
+        for i in range(0, 10):
             start_time_approx_geisberger = time.time()
             geisberger_betweenness = nk.centrality.EstimateBetweenness(
                 G, 10000, True, False)
@@ -97,7 +97,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
         # !"Riondato" approach:
         table.add_row("Approximation - Riondato/NetworKit")
         average_time_riondato = 0
-        for i in range(0, 1):
+        for i in range(0, 10):
             start_time_approx_riondato = time.time()
             riondato_betweenness = nk.centrality.ApproxBetweenness(G,
                                                                    epsilon=0.01,
@@ -120,7 +120,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
         # !"Kadabra" approach:
         table.add_row("Approximation - Kadabra/NetworKit")
         average_time_kadabra = 0
-        for i in range(0, 1):
+        for i in range(0, 10):
             start_time_kadabra = time.time()
             betweenness_kadabra = nk.centrality.KadabraBetweenness(
                 G, 0.1, 0.8)  # these are the default settings
@@ -141,7 +141,7 @@ def perform_experiments(console, graph, input_file, directed, writeResult, resul
         # # !"Bergamini" approach:
         table.add_row("Approximation - Bergamini/NetworKit")
         average_time_bergamini = 0
-        for i in range(0, 1):
+        for i in range(0, 10):
             start_time_approx_bergamini = time.time()
             bergamini_betweenness = nk.centrality.DynApproxBetweenness(
                 G, epsilon=0.075, delta=0.1, storePredecessors=False, universalConstant=0.5)
