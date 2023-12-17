@@ -17,14 +17,13 @@ def perform_experiments(console, graph, input_file):
         start_time_exact = time.time()
         betweenness = nx.betweenness_centrality(graph)
         end_time_exact = time.time()
-        # TODO Write Exact To File
         table.add_row("Exact - Brandes NetworkX",
                       str(end_time_exact - start_time_exact))
         progress.update(task, advance=1)
 
         # !Approximation of betweenness using sampling/pivotting in NetworkX:
         table.add_row("Approximation using sampling - Brandes/NetworkX")
-        samples = [60, 80]  # TODO Add more sample percentages if wanted?
+        samples = [60, 80]
         for sample in samples:
             sampleSize = math.floor(len(graph.nodes) * (sample/100))
             average_time_brandes = 0
@@ -64,7 +63,7 @@ def perform_experiments(console, graph, input_file):
         for i in range(0, 10):
             start_time_approx_geisberger = time.time()
             geisberger_betweenness = nk.centrality.EstimateBetweenness(
-                G, 50, True, False)
+                G, 10000, True, False)
             geisberger_betweenness.run()
             end_time_approx_geisberger = time.time()
             average_time_geisberger += (end_time_approx_geisberger -
@@ -80,7 +79,7 @@ def perform_experiments(console, graph, input_file):
         for i in range(0, 10):
             start_time_approx_riondato = time.time()
             riondato_betweenness = nk.centrality.ApproxBetweenness(G,
-                                                                   epsilon=0.1,
+                                                                   epsilon=0.01,
                                                                    delta=0.1,
                                                                    universalConstant=0.5)
             riondato_betweenness.run()
@@ -98,7 +97,7 @@ def perform_experiments(console, graph, input_file):
         for i in range(0, 10):
             start_time_approx_bergamini = time.time()
             bergamini_betweenness = nk.centrality.DynApproxBetweenness(
-                G, epsilon=0.01, delta=0.1, storePredecessors=True, universalConstant=0.5)
+                G, epsilon=0.0001, delta=0.1, storePredecessors=True, universalConstant=0.5)
             bergamini_betweenness.run()
             end_time_approx_bergamini = time.time()
             average_time_bergamini += (end_time_approx_bergamini -
